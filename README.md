@@ -58,6 +58,10 @@ const exampleUser = createUserStruct({
 
 exampleUser.phoneNumber
 //=> Error: attempted to access non-existent property `phoneNumber` on struct
+
+
+exampleUser.phoneNumber = '845-382-8492';
+//=> Error: attempted to set non-existent property `phoneNumber` on struct
 ```
 
 Struct creating functions defined with `defineStruct` will also throw a runtime
@@ -100,7 +104,7 @@ Error: attempted to access non-existent property `phoneNumber` on struct
 When you call define struct, what you are receiving back is a function that will
 take whatever object you give it and wrap it in a
 [`Proxy`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy).
-The `Proxy` basically intecepts any `get`-like call made on the object, checks to
-see if the property that is trying to be accessed is valid property previousily
-defined when `defineStruct` was called, and if it is, it simply returns the value,
-otherwise it will throw an error.
+The `Proxy` basically intecepts any call made on the object that deals with
+property access, checks to see if the property that is trying to be accessed is
+valid property previousily defined when `defineStruct` was called, and if it is,
+it simply returns the value, otherwise it will throw an error.

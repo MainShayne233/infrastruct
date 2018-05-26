@@ -1,6 +1,7 @@
 // @flow
 import {
   nonExistentPropertyAccessError,
+  nonExistentPropertySetError,
   nonExistentPropertyInParamsError,
 } from './errors';
 
@@ -31,6 +32,15 @@ export default (validProperties: Array<string>): ((Object) => Object) => (
         return struct[property];
       } else {
         throw nonExistentPropertyAccessError(property);
+      }
+    },
+
+    set: (struct: Object, property: string, value: any) => {
+      if (validProperties.includes(property)) {
+        struct[property] = value;
+        return true;
+      } else {
+        throw nonExistentPropertySetError(property);
       }
     },
   });

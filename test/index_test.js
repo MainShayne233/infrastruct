@@ -5,6 +5,7 @@ import defineStruct from '../src';
 
 const SAMPLE_PROPERTIES = ['name', 'age', 'zodiac'];
 const SAMPLE_NON_EXISTENT_PROPERTY = 'spiritAnimal';
+const SAMPLE_NEW_NAME = 'reegal';
 const SAMPLE_PARAMS = {
   name: 'xathan',
   age: 118,
@@ -33,7 +34,7 @@ describe('makeStruct', () => {
     expect(struct.zodiac).to.equal(SAMPLE_PARAMS.zodiac);
   });
 
-  it('should throw an error if you try to access field that does not exist on struct', () => {
+  it('should throw an error if you try to access a field that does not exist on struct', () => {
     const structCreator = defineStruct(SAMPLE_PROPERTIES);
     const struct = structCreator(SAMPLE_PARAMS);
 
@@ -43,6 +44,20 @@ describe('makeStruct', () => {
     expect(SAMPLE_PROPERTIES).to.not.include(SAMPLE_NON_EXISTENT_PROPERTY);
     expect(nonExistentPropertyAccessCall).to.throw(
       `attempted to access non-existent property \`${SAMPLE_NON_EXISTENT_PROPERTY}\` on struct`,
+    );
+  });
+
+  it('should throw an error if you try to set a field that does not exist on struct', () => {
+    const structCreator = defineStruct(SAMPLE_PROPERTIES);
+    const struct = structCreator(SAMPLE_PARAMS);
+
+    const nonExistentPropertyAccessCall = () => {
+      struct[SAMPLE_NON_EXISTENT_PROPERTY] = 'panda';
+    };
+
+    expect(SAMPLE_PROPERTIES).to.not.include(SAMPLE_NON_EXISTENT_PROPERTY);
+    expect(nonExistentPropertyAccessCall).to.throw(
+      `attempted to set non-existent property \`${SAMPLE_NON_EXISTENT_PROPERTY}\` on struct`,
     );
   });
 
@@ -62,5 +77,17 @@ describe('makeStruct', () => {
     expect(typeof SAMPLE_STRUCT).to.equal('object');
     expect({ ...SAMPLE_STRUCT }).to.eql(SAMPLE_PARAMS);
     expect(Object.keys(SAMPLE_STRUCT)).to.eql(Object.keys(SAMPLE_PARAMS));
+  });
+
+  it('should produce structs that can behave like normal objects', () => {
+    // typeof
+    expect(typeof SAMPLE_STRUCT).to.equal('object');
+    // spread syntax
+    expect({ ...SAMPLE_STRUCT }).to.eql(SAMPLE_PARAMS);
+    // Object.keys
+    expect(Object.keys(SAMPLE_STRUCT)).to.eql(Object.keys(SAMPLE_PARAMS));
+    // value reassignment
+    SAMPLE_STRUCT.name = SAMPLE_NEW_NAME;
+    expect(SAMPLE_STRUCT.name).to.equal(SAMPLE_NEW_NAME);
   });
 });

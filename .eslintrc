@@ -5,6 +5,7 @@
   "rules": {
     "arrow-parens": ["error", "always"],
     "function-paren-newline": "off",
-    "no-else-return": "off"
+    "no-else-return": "off",
+    "no-param-reassign": "off"
   }
 }
