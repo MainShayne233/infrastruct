@@ -2,6 +2,9 @@
 
 Make JavaScript objects with stricter, struct-like data access.
 
+[![npm version](https://badge.fury.io/js/infrastruct.svg)](https://badge.fury.io/js/infrastruct)
+[![Build Status](https://travis-ci.org/MainShayne233/infrastruct.svg?branch=master)](https://travis-ci.org/MainShayne233/infrastruct)
+
 ## Install
 
 Install the dependency
