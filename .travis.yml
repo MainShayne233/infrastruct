@@ -4,7 +4,7 @@ node_js:
 
 install:
   - npm cache clean --force
-  - npm install --production
+  - npm --no-optional install
 
 script:
   - npm run test
