@@ -4,6 +4,7 @@ import { expect } from 'chai';
 import defineStruct from '../src';
 
 const SAMPLE_PROPERTIES = ['name', 'age', 'zodiac'];
+const SAMPLE_NON_EXISTENT_PROPERTY = 'spiritAnimal';
 const SAMPLE_PARAMS = {
   name: 'xathan',
   age: 118,
@@ -30,16 +31,28 @@ describe('makeStruct', () => {
     expect(struct.zodiac).to.equal(SAMPLE_PARAMS.zodiac);
   });
 
-  it('should throw error if you try to access field that does not exist on struct', () => {
+  it('should throw an error if you try to access field that does not exist on struct', () => {
     const structCreator = defineStruct(SAMPLE_PROPERTIES);
     const struct = structCreator(SAMPLE_PARAMS);
-    const nonExistentProperty = 'spiritAnimal';
 
-    const nonExistentPropertyAccessCall = () => struct[nonExistentProperty];
+    const nonExistentPropertyAccessCall = () =>
+      struct[SAMPLE_NON_EXISTENT_PROPERTY];
 
-    expect(SAMPLE_PROPERTIES).to.not.include(nonExistentProperty);
+    expect(SAMPLE_PROPERTIES).to.not.include(SAMPLE_NON_EXISTENT_PROPERTY);
     expect(nonExistentPropertyAccessCall).to.throw(
-      'attempted to access non-existent property `spiritAnimal` on struct',
+      `attempted to access non-existent property \`${SAMPLE_NON_EXISTENT_PROPERTY}\` on struct`,
+    );
+  });
+
+  it('should throw an error if you try to create a struct with non-existent params', () => {
+    const structCreator = defineStruct(SAMPLE_PROPERTIES);
+
+    const nonExistentPropertyAccessCall = () =>
+      structCreator({ [SAMPLE_NON_EXISTENT_PROPERTY]: 'panda' });
+
+    expect(SAMPLE_PROPERTIES).to.not.include(SAMPLE_NON_EXISTENT_PROPERTY);
+    expect(nonExistentPropertyAccessCall).to.throw(
+      `attempted to create struct with non-existent property \`${SAMPLE_NON_EXISTENT_PROPERTY}\``,
     );
   });
 });
