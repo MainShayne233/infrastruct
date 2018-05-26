@@ -10,6 +10,8 @@ const SAMPLE_PARAMS = {
   age: 118,
   zodiac: 'libra',
 };
+const SAMPLE_STRUCT_CREATOR = defineStruct(SAMPLE_PROPERTIES);
+const SAMPLE_STRUCT = SAMPLE_STRUCT_CREATOR(SAMPLE_PARAMS);
 
 describe('doctests', () => {
   doctest('./src/index.js');
@@ -54,5 +56,11 @@ describe('makeStruct', () => {
     expect(nonExistentPropertyAccessCall).to.throw(
       `attempted to create struct with non-existent property \`${SAMPLE_NON_EXISTENT_PROPERTY}\``,
     );
+  });
+
+  it('should produce structs that can behave like normal objects', () => {
+    expect(typeof SAMPLE_STRUCT).to.equal('object');
+    expect({ ...SAMPLE_STRUCT }).to.eql(SAMPLE_PARAMS);
+    expect(Object.keys(SAMPLE_STRUCT)).to.eql(Object.keys(SAMPLE_PARAMS));
   });
 });
