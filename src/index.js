@@ -17,7 +17,10 @@ const createStructWithValidParams = (
   }, {});
 
 /**
- * TODO write docs
+ * Use this function to define a struct for certain valid properties.
+ *
+ * @param validProperties - The properties the struct supports
+ * @return - A function that will generate structs
  */
 export default (validProperties: Array<string>): ((Object) => Object) => (
   params: Object,
