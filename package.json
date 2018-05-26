@@ -1,8 +1,8 @@
 {
-  "name": "javascript-library-boilerplate",
-  "version": "0.0.1",
-  "description": "Boilerplate for starting a JavaScript library",
-  "main": "index.js",
+  "name": "infrastruct",
+  "version": "0.0.2",
+  "description": "Make JavaScript objects with stricter, struct-like data access.",
+  "main": "dist/index.js",
   "scripts": {
     "build": "webpack -p",
     "test": "mocha --require babel-register",

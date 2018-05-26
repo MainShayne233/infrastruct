@@ -1,10 +1,10 @@
 language: node_js
 node_js:
-  - "9.9.0"
+  - "10.2.1"
 
 install:
   - npm cache clean --force
-  - npm install
+  - npm install --production
 
 script:
   - npm run test
