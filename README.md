@@ -8,7 +8,7 @@ Make JavaScript objects with stricter, struct-like data access.
 ## Install
 
 Install the dependency
-```
+```bash
 # using npm
 npm i --save infrastruct
 
@@ -22,7 +22,7 @@ Import into module
 import defineStruct from 'infrastruct';
 
 // if not using ES6
-const defineStruct = require('infrastruct');
+const defineStruct = require('infrastruct').default;
 ```
 
 ## What does this do and why?
